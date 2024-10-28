@@ -2,7 +2,6 @@ import { useState } from 'react';
 import TaskForm from './components/TaskForm'; 
 import './App.css';
 
-
 function App() {
   const initialData = [
     {
@@ -17,20 +16,45 @@ function App() {
     },
   ];
 
-  // Move the tasks state up to App component
   const [tasks, setTasks] = useState(initialData);
+  const [filter, setFilter] = useState('all');
 
-  // Calculate how many tasks are not completed
   const incompleteTasks = tasks.filter(task => !task.completed).length;
+
+  const filteredTasks = tasks.filter(task => {
+    if (filter === 'completed') return task.completed;
+    if (filter === 'pending') return !task.completed;
+    return true;
+  });
 
   return (
     <>
       <h1>To Do List</h1>
-      {/* Display the number of remaining tasks */}
       <h2>{incompleteTasks} tasks remaining</h2>
 
-      {/* Pass tasks and setTasks as props to TaskForm */}
-      <TaskForm tasks={tasks} setTasks={setTasks} />
+      {/* Filter Buttons */}
+      <div className="filter-buttons">
+        <button 
+          className={`btn-filter ${filter === 'all' ? 'active' : ''}`} 
+          onClick={() => setFilter('all')}
+        >
+          All
+        </button>
+        <button 
+          className={`btn-filter ${filter === 'pending' ? 'active' : ''}`} 
+          onClick={() => setFilter('pending')}
+        >
+          Pending
+        </button>
+        <button 
+          className={`btn-filter ${filter === 'completed' ? 'active' : ''}`} 
+          onClick={() => setFilter('completed')}
+        >
+          Completed
+        </button>
+      </div>
+
+      <TaskForm tasks={filteredTasks} setTasks={setTasks} />
     </>
   );
 }

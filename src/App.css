@@ -67,7 +67,7 @@ input[type="text"]:focus {
   border-radius: 15px;
   position: relative;
   z-index: 1;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Adding a box shadow for visibility */
+  box-shadow: 0 4px 12px rgba(38, 62, 159, 0.548);
 }
 
 .task-item {
@@ -105,4 +105,32 @@ input[type="text"]:focus {
 
 .btn-delete:hover {
   background: #dc2626;
+}
+
+.filter-buttons {
+  display: flex;
+  justify-content: center;
+  margin: 1.5rem 0;
+}
+
+.btn-filter {
+  padding: 0.5rem 1.5rem;
+  background-color: #e5e7eb;
+  color: #1f2937;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.3s, color 0.3s;
+  margin: 0 0.5rem;
+  font-size: 1rem;
+}
+
+.btn-filter.active {
+  background-color: #646cff;
+  color: white;
+}
+
+.btn-filter:hover {
+  background-color: #535bf2;
+  color: white;
 }

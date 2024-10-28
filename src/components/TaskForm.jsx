@@ -1,11 +1,4 @@
-import React, { useState } from 'react'
-//renders an input box and a button for creating new tasks. 
-//Decide where the shared state should live. This is where you would also want to define the functions for updating the app state, including:
-
-//a function for toggling the complete status of a task
-//a function for adding a new task
-//a function for deleting a task
-
+import React, { useState } from 'react';
 
 function TaskForm({ tasks, setTasks }) {
   const [taskData, settaskData] = useState({ taskName: '', completed: false });
@@ -24,17 +17,18 @@ function TaskForm({ tasks, setTasks }) {
   }
 
   function toggleTaskCompletion(id) {
-    setTasks(tasks.map(task => 
+    setTasks(tasks.map(task =>
       task.id === id ? { ...task, completed: !task.completed } : task
     ));
   }
 
   const newListUI = tasks.map((task) => (
-    <div key={task.id} style={{ display: 'flex', justifyContent: 'center', justifyContent: "space-between", margin: '1em' }}>
+    <div key={task.id} style={{ display: 'flex', justifyContent: 'space-between', margin: '1em' }}>
       <input
         type="checkbox"
         checked={task.completed}
         onChange={() => toggleTaskCompletion(task.id)}
+        disabled={task.completed} // Disable the checkbox if task is completed
       />
       <p style={{ textDecoration: task.completed ? 'line-through' : 'none' }}>
         {task.taskName}
@@ -58,7 +52,7 @@ function TaskForm({ tasks, setTasks }) {
         {newListUI}
       </div>
     </>
-  )
+  );
 }
 
 export default TaskForm;
